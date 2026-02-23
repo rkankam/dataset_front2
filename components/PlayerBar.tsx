@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import WaveSurfer from "wavesurfer.js";
+import { useEffect, useRef, useState } from "react";
 import type { Track } from "@/lib/tracks";
 
 type PlayerBarProps = {
@@ -36,8 +35,7 @@ export default function PlayerBar({
   onToggleQueue,
   queueOpen
 }: PlayerBarProps) {
-  const waveContainerRef = useRef<HTMLDivElement | null>(null);
-  const waveSurferRef = useRef<WaveSurfer | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -45,94 +43,68 @@ export default function PlayerBar({
   const [volume, setVolume] = useState(0.8);
   const volumePercent = Math.round(volume * 100);
 
-  const waveOptions = useMemo(
-    () => ({
-      waveColor: "rgba(244, 246, 250, 0.25)",
-      progressColor: "#1ed760",
-      cursorColor: "#3a86ff",
-      barWidth: 2,
-      barGap: 2,
-      barRadius: 2,
-      height: 48,
-      normalize: true
-    }),
-    []
-  );
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.volume = volume;
+  }, [volume]);
 
   useEffect(() => {
-    let cancelled = false;
-    const initWave = () => {
-      if (cancelled || !waveContainerRef.current) return;
-      if (waveContainerRef.current.clientWidth === 0) {
-        requestAnimationFrame(initWave);
-        return;
-      }
-      const waveSurfer = WaveSurfer.create({
-        container: waveContainerRef.current,
-        ...waveOptions
-      });
-
-    waveSurfer.on("ready", () => {
-      setIsReady(true);
-      setDuration(waveSurfer.getDuration());
-      setCurrentTime(0);
-      waveSurfer.setVolume(volume);
-      waveSurfer.play();
-      onReady?.();
-    });
-
-    waveSurfer.on("audioprocess", () => {
-      setCurrentTime(waveSurfer.getCurrentTime());
-    });
-
-    waveSurfer.on("play", () => setIsPlaying(true));
-    waveSurfer.on("pause", () => setIsPlaying(false));
-    waveSurfer.on("finish", () => {
-      setIsPlaying(false);
-      onNext?.();
-    });
-
-      waveSurferRef.current = waveSurfer;
-    };
-
-    initWave();
-
-    return () => {
-      cancelled = true;
-      if (waveSurferRef.current) {
-        waveSurferRef.current.destroy();
-        waveSurferRef.current = null;
-      }
-    };
-  }, [waveOptions]);
-
-  useEffect(() => {
-    const waveSurfer = waveSurferRef.current;
-    if (!waveSurfer) return;
+    const audio = audioRef.current;
+    if (!audio) return;
     if (!audioSrc) {
-      waveSurfer.empty();
       setIsReady(false);
       setIsPlaying(false);
       setCurrentTime(0);
       setDuration(0);
       return;
     }
-    setIsReady(false);
-    waveSurfer.load(audioSrc);
+    audio.src = audioSrc;
+    audio.load();
   }, [audioSrc]);
 
-
-  useEffect(() => {
-    const waveSurfer = waveSurferRef.current;
-    if (!waveSurfer) return;
-    waveSurfer.setVolume(volume);
-  }, [volume]);
-
   const togglePlay = () => {
-    const waveSurfer = waveSurferRef.current;
-    if (!waveSurfer || !isReady) return;
-    waveSurfer.playPause();
+    const audio = audioRef.current;
+    if (!audio || !isReady) return;
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
   };
+
+  const handleTimeUpdate = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    setCurrentTime(audio.currentTime || 0);
+  };
+
+  const handleLoaded = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    setDuration(audio.duration || 0);
+    setIsReady(true);
+    onReady?.();
+  };
+
+  const handleEnded = () => {
+    setIsPlaying(false);
+    onNext?.();
+  };
+
+  const handlePlayState = (playing: boolean) => {
+    setIsPlaying(playing);
+  };
+
+  const handleSeek = (event: React.PointerEvent<HTMLDivElement>) => {
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const percent = (event.clientX - bounds.left) / bounds.width;
+    audio.currentTime = Math.max(0, Math.min(1, percent)) * duration;
+  };
+
+  const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className="player">
@@ -172,7 +144,10 @@ export default function PlayerBar({
         </button>
       </div>
       <div className="player-wave">
-        <div className="waveform" ref={waveContainerRef} />
+        <div className="waveform" onPointerDown={handleSeek}>
+          <div className="waveform-track" />
+          <div className="waveform-progress" style={{ width: `${progressPercent}%` }} />
+        </div>
         <div className="player-times">
           <span className="player-time">{formatTime(currentTime)}</span>
           <span className="player-time">{formatTime(duration)}</span>
@@ -263,6 +238,15 @@ export default function PlayerBar({
           />
         </div>
       </label>
+      <audio
+        ref={audioRef}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoaded}
+        onCanPlay={handleLoaded}
+        onPlay={() => handlePlayState(true)}
+        onPause={() => handlePlayState(false)}
+        onEnded={handleEnded}
+      />
     </div>
   );
 }
