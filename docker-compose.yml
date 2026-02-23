@@ -1,0 +1,26 @@
+services:
+  dataset-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dataset-frontend
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    expose:
+      - "3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dataset-frontend.rule=Host(`${APP_DOMAIN}`)"
+      - "traefik.http.routers.dataset-frontend.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}"
+      - "traefik.http.routers.dataset-frontend.tls=true"
+      - "traefik.http.routers.dataset-frontend.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
+      - "traefik.http.services.dataset-frontend.loadbalancer.server.port=3000"
+      - "traefik.docker.network=${TRAEFIK_NETWORK:-traefik}"
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+    name: ${TRAEFIK_NETWORK:-traefik}
