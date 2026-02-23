@@ -140,8 +140,8 @@ export default function TrackBrowser({ tracks }: TrackBrowserProps) {
     setIsLoading(true);
     setCurrentTrack(track);
     try {
-      const encodedName = encodeURIComponent(track.b2FileName);
-      setAudioSrc(`/api/b2/stream?fileName=${encodedName}`);
+      const params = new URLSearchParams({ fileName: track.b2FileName });
+      setAudioSrc(`/api/b2/stream?${params.toString()}`);
     } catch (error) {
       console.error(error);
       setIsLoading(false);
