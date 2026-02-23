@@ -124,6 +124,14 @@ export default function TrackBrowser({ tracks }: TrackBrowserProps) {
     return nextQueue;
   };
 
+  const isSameQueue = (a: Track[], b: Track[]) => {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i].id !== b[i].id) return false;
+    }
+    return true;
+  };
+
   const startTrack = async (
     track: Track,
     shouldSeedQueue = true,
@@ -207,10 +215,18 @@ export default function TrackBrowser({ tracks }: TrackBrowserProps) {
 
   useEffect(() => {
     if (!currentTrack) return;
-    setQueue(
-      extendQueue(queue, filteredTracks, currentTrack, history, queueSize, shuffleEnabled)
+    const nextQueue = extendQueue(
+      queue,
+      filteredTracks,
+      currentTrack,
+      history,
+      queueSize,
+      shuffleEnabled
     );
-  }, [filteredTracks, shuffleEnabled, currentTrack, history]);
+    if (!isSameQueue(queue, nextQueue)) {
+      setQueue(nextQueue);
+    }
+  }, [filteredTracks, shuffleEnabled, currentTrack, history, queue]);
 
   return (
     <div className="page">

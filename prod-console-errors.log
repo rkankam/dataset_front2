@@ -1,0 +1,60 @@
+Total messages: 8 (Errors: 8, Warnings: 0)
+
+[ERROR] Failed to load resource: the server responded with a status of 404 () @ https://dataset.rxlab.pro/favicon.ico:0
+Error: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at sq (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:146765)
+    at co (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:158779)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:99416
+    at iu (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:103867)
+    at ia (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:95223)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91088
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91095
+    at oZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91200)
+    at MessagePort.M (https://dataset.rxlab.pro/_next/static/chunks/117-14dd35a9dd2203e1.js:1:84770)
+Error: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at sq (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:146765)
+    at co (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:158779)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:99416
+    at iu (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:103867)
+    at ia (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:95223)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91088
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91095
+    at oZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91200)
+    at MessagePort.M (https://dataset.rxlab.pro/_next/static/chunks/117-14dd35a9dd2203e1.js:1:84770)
+Error: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at sq (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:146765)
+    at co (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:158779)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:99416
+    at iu (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:103867)
+    at ia (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:95223)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91088
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91095
+    at oZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91200)
+    at MessagePort.M (https://dataset.rxlab.pro/_next/static/chunks/117-14dd35a9dd2203e1.js:1:84770)
+Error: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at sq (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:146765)
+    at co (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:158779)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:99416
+    at iu (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:103867)
+    at ia (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:95223)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91088
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91095
+    at oZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91200)
+    at MessagePort.M (https://dataset.rxlab.pro/_next/static/chunks/117-14dd35a9dd2203e1.js:1:84770)
+Error: Minified React error #418; visit https://react.dev/errors/418 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at t5 (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:24670)
+    at iZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:120535)
+    at ia (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:95162)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91088
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91095
+    at oZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91200)
+    at MessagePort.M (https://dataset.rxlab.pro/_next/static/chunks/117-14dd35a9dd2203e1.js:1:84770)
+Error: Minified React error #423; visit https://react.dev/errors/423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at iZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:118349)
+    at ia (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:95162)
+    at https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:94984
+    at il (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:94991)
+    at oJ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:92347)
+    at oZ (https://dataset.rxlab.pro/_next/static/chunks/fd9d1056-e3d373074663785d.js:1:91766)
+    at MessagePort.M (https://dataset.rxlab.pro/_next/static/chunks/117-14dd35a9dd2203e1.js:1:84770)
+Failed to load because no supported source was found.

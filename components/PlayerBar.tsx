@@ -60,11 +60,17 @@ export default function PlayerBar({
   );
 
   useEffect(() => {
-    if (!waveContainerRef.current) return;
-    const waveSurfer = WaveSurfer.create({
-      container: waveContainerRef.current,
-      ...waveOptions
-    });
+    let cancelled = false;
+    const initWave = () => {
+      if (cancelled || !waveContainerRef.current) return;
+      if (waveContainerRef.current.clientWidth === 0) {
+        requestAnimationFrame(initWave);
+        return;
+      }
+      const waveSurfer = WaveSurfer.create({
+        container: waveContainerRef.current,
+        ...waveOptions
+      });
 
     waveSurfer.on("ready", () => {
       setIsReady(true);
@@ -86,11 +92,17 @@ export default function PlayerBar({
       onNext?.();
     });
 
-    waveSurferRef.current = waveSurfer;
+      waveSurferRef.current = waveSurfer;
+    };
+
+    initWave();
 
     return () => {
-      waveSurfer.destroy();
-      waveSurferRef.current = null;
+      cancelled = true;
+      if (waveSurferRef.current) {
+        waveSurferRef.current.destroy();
+        waveSurferRef.current = null;
+      }
     };
   }, [waveOptions]);
 
